@@ -7,22 +7,10 @@ import { EmployeeService } from './services/employee.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'ems-ui';
-  constructor(private employeeService: EmployeeService){
-
+  constructor(public employeeService: EmployeeService) {
+      
   }
 
-  getEmployeeList(){
-    this.employeeService.getAllEmployee().subscribe({
-      next: (res)=>{
-       console.log(res);
-       
-      },
-      error: (error)=>{
-         console.log(error);
-         
-      }
-    })
+ 
 
-  }
 }
