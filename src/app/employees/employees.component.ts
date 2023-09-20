@@ -2,6 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { CellClickedEvent, ColDef, GridReadyEvent } from 'ag-grid-community';
 import { EmployeeService } from '../services/employee.service';
+import {MatDialog,MatDialogRef} from '@angular/material/dialog'
+import { AddAndUpdateEmployeeComponent } from './components/add-and-update-employee/add-and-update-employee.component';
 
 @Component({
   selector: 'app-employees',
@@ -22,7 +24,10 @@ export class EmployeesComponent {
     resizable: true
   }
   @ViewChild(AgGridAngular) agGrid!:AgGridAngular;
-  constructor(public employeeService: EmployeeService) {
+  constructor(
+    public employeeService: EmployeeService,
+    public dialog: MatDialog
+    ) {
       
   }
   getEmployeeList() {
@@ -53,5 +58,14 @@ export class EmployeesComponent {
        
       ],
     });
+  }
+  openAddEmployeeDialog(){
+   this.dialog.open(AddAndUpdateEmployeeComponent,{
+    width: '400px',
+    height: '400px'
+   }).afterClosed().subscribe((data)=>{
+     console.log(data);
+     
+   })
   }
 }

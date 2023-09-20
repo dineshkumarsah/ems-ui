@@ -1,0 +1,23 @@
+<div class="form-container">
+    <div class="d-flex flex-row-reverse w-100" (click)="closeDialog()">
+        <div style="width: 37px"></div>
+        <mat-icon>close</mat-icon>
+    </div>
+    <div style="height: 40px; width: 100%;"></div>
+    <form class="form-container" [formGroup]="addEmployeeForm" (ngSubmit)="addEmployee()">
+        <mat-form-field appearance="outline">
+            <mat-label>FIRST NAME</mat-label>
+            <input matInput placeholder="enter your first name" formControlName="firstName">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>LAST NAME</mat-label>
+            <input matInput placeholder="enter you last name" formControlName="lastName">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>EMAIL</mat-label>
+            <input matInput placeholder="enter your email" formControlName="email">
+        </mat-form-field>
+        <button mat-raised-button color="primary">SUBMIT</button>
+    </form>
+
+</div>
