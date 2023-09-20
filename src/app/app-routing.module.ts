@@ -10,7 +10,8 @@ const routes: Routes = [
   {
     path: 'departments',
     loadChildren: ()=> import('./departments/departments.module').then(m=>m.DepartmentsModule)
-  }
+  },
+  { path: 'ngrx', loadChildren: () => import('./ngrx/ngrx.module').then(m => m.NgrxModule) }
 
 ];
 
