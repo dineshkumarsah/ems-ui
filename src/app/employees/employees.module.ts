@@ -12,12 +12,14 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CellRendererComponent } from './components/cell-renderer/cell-renderer.component';
+import { DeletePopUpComponent } from './components/delete-pop-up/delete-pop-up.component';
 
 
 @NgModule({
   declarations: [
     EmployeesComponent,
-    AddAndUpdateEmployeeComponent
+    AddAndUpdateEmployeeComponent,CellRendererComponent, DeletePopUpComponent,DeletePopUpComponent
   ],
   imports: [
     CommonModule,

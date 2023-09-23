@@ -1,9 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
-import { CellClickedEvent, ColDef, GridReadyEvent } from 'ag-grid-community';
+import { CellClickedEvent, ColDef, GridApi, GridReadyEvent } from 'ag-grid-community';
 import { EmployeeService } from '../services/employee.service';
 import {MatDialog,MatDialogRef} from '@angular/material/dialog'
 import { AddAndUpdateEmployeeComponent } from './components/add-and-update-employee/add-and-update-employee.component';
+import { CellRendererComponent } from './components/cell-renderer/cell-renderer.component';
+
 
 @Component({
   selector: 'app-employees',
@@ -13,15 +15,18 @@ import { AddAndUpdateEmployeeComponent } from './components/add-and-update-emplo
 export class EmployeesComponent {
   rowData!:any;
   public columnDefs: ColDef[] = [
-    { field: 'id'},
+    { field: 'id',checkboxSelection: true, headerCheckboxSelection: true},
     { field: 'firstName'},
     { field: 'lastName'},
-    { field: 'email'}
+    { field: 'email'},
+    { field: 'total', cellRenderer: CellRendererComponent }
   ]
+  gridApi!: GridApi
   public defaultColDef:ColDef={
     sortable:true,
     filter:true,
-    resizable: true
+    resizable: true,
+    
   }
   @ViewChild(AgGridAngular) agGrid!:AgGridAngular;
   constructor(
@@ -30,6 +35,7 @@ export class EmployeesComponent {
     ) {
       
   }
+
   getEmployeeList() {
     this.employeeService.getAllEmployee().subscribe({
       next: (res) => {
@@ -44,9 +50,10 @@ export class EmployeesComponent {
     })
 
   }
-  onGridReady(params: GridReadyEvent){
-   this.getEmployeeList();
-   this.sizeToFit()
+  onGridReady(params: GridReadyEvent) {
+    this.gridApi = params.api;
+    this.getEmployeeList();
+    this.sizeToFit();
   }
   onCellClicked( e: CellClickedEvent):void {
     
@@ -65,7 +72,24 @@ export class EmployeesComponent {
     height: '400px'
    }).afterClosed().subscribe((data)=>{
      console.log(data);
+     this.employeeService.createEmployee(data).subscribe({
+      next: (data)=>{
+       this.rowData.push(data);
+       this.gridApi.setRowData(this.rowData)
+       
+      },
+      error: (error)=>{
+
+      }
+     })
      
    })
+  }
+  getRowId(prams: any){
+  console.log(prams);
+  
+  }
+  clickMe(){
+    alert("hello")
   }
 }

@@ -1,0 +1,17 @@
+<div class="delete-pop-up">
+    <div class="d-flex flex-row-reverse close" >
+        <mat-icon class="" (click)="close()">close</mat-icon>
+    </div>
+    <div class="">
+        <mat-icon class="icon-display">delete</mat-icon>
+    </div>
+    <mat-icon class="icon-display"></mat-icon>
+    <div>
+        <h3>Are sure to Delete this Employee Details</h3>
+    </div>
+    <div class="d-flex justify-content-between w-50" >
+        <button mat-flat-button color="primary" class="mr-4" (click)="delete()">Delete</button>
+        <button mat-flat-button color="warn" (click)="close()">Cancel</button>
+    </div>
+   
+</div>
